@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="display:flex; flex-direction: row; justify-content:center; min-height:100vh; ">
+    <div id="app">
+        <form @submit.prevent="submitForm">
+            <div>
+                <label for="name">Name:</label><br>
+                <input id="name" type="text" v-model="name" required/>
+            </div>
+            <div>
+                <label for="email">Email:</label><br>
+                <input id="email" type="email" v-model="email" required/>
+            </div>
+            <div>
+                <label for="caps">How do I turn off caps lock:</label><br>
+                <textarea id="caps" v-model="caps" required></textarea>
+            </div>
+            <button :class="[name ? activeClass : '']" type="submit">Submit</button>
+            <div>
+                <h3>Response from Server</h3>
+                <pre>{{response}}</pre>
+            </div>
+        </form>
+    </div>
+
+    <script src="http://unpkg.com/vue@next"></script>
+
+    <script>
+        const App = {
+            data() {
+                return {
+                    name:'',
+                    email:'',
+                    caps:'',
+                    response:'',
+                    activeClass:'active'
+                }
+            },
+            methods: {
+                submitForm(){
+                    axios.post('//jsonplaceholder.typicode.com/posts', {
+                        name: this.name,
+                        email: this.email,
+                        caps: this.caps
+                    }).then( response => {
+                        this.response = JSON.stringify(response, null, 2)
+                    }).catch(error => {
+                        this.response = 'Error: ' + error.response.status
+                    })
+                }
+            }
+        }
+        Vue.createApp( App).mount( '#app' )
+    </script>
+</body>
+</html>
