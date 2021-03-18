@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <h3>Type here:</h3>
+        <!--
+        <textarea v-model="total" class="message" rows="5" maxlength="72"></textarea>
+        <br>
+        <p class="booktext">{{total}}</p>
+        <button v-show="total" type="submit">Submit</button>
+        <p v-if = "total === 'qaqa' || total === 'lala'">Haaaaaaaaaaa</p>
+        <p v-if = "total === 'zaza'">Gooooooooooo</p>-->
+        <!--
+        <ul>
+            <li v-for = "(value, key, index) in total" :key = "value">
+                {{index}}, {{key}}, {{value}}
+            </li>
+        </ul>
+        <p v-pre></p>
+        <span>{{$data}}</span>-->
+        <div>
+            <input v-model.number="x" type="number"/>
+            <span>+</span>
+            <input v-model.number="y" type="number"/>
+            <span>=</span>
+            <span v-model="sum">{{sum()}}</span>
+        </div>
+
+       
+        <p><input type="text"/></p>
+    </div>
+
+    <script src="http://unpkg.com/vue@next"></script>
+    <!--<script src="./node_modules/vue/dist/vue.global.js"></script>-->
+
+    <script>
+        const App = {
+            data() {
+                return {
+                    x:7,
+                    y:8,
+                    total: 45,
+
+                    /*total: {
+                        afdsfasdfasfd:"adsfsadf",
+                        adffffffffff:"dsfdfdff",
+                        lllllllllll:"kkkk"
+                    }*/
+                }
+            },
+            methods: {
+                sum() {
+                    return this.x + this.y
+                },
+                increaseCounter() {
+                    this.total++
+                },
+                decreaseCounter() {
+                    this.total--
+                },
+            }
+        }
+        Vue.createApp( App).mount( '#app' )
+    </script>
+</body>
+</html>

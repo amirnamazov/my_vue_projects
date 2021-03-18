@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="comment in comments":key="comment">
+                {{comment}}
+            </li>
+        </ul>
+        <input @keyup.enter="addComment" v-model="newComment" placeholder="Add a comment"/>
+    </div>
+
+    <script src="http://unpkg.com/vue@next"></script>
+    <!--<script src="./node_modules/vue/dist/vue.global.js"></script>-->
+
+    <script>
+        const App = {
+            data() {
+                return {
+                    newComment: '',
+                    comments: [
+                        'Aaaaaaaaaaaa',
+                        'Bbbbbbbbbbbb',
+                        'Cccccccccccc'
+                    ]
+                }
+            },
+            methods: {
+                addComment() {
+                    this.comments.push(this.newComment)
+                    this.newComment = ''
+                }
+            }
+        }
+        Vue.createApp( App).mount( '#app' )
+    </script>
+</body>
+</html>
